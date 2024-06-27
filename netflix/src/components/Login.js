@@ -16,6 +16,9 @@ setIsLogin(!isLogin)
         {
             e.preventDefault();
             console.log(fullName,email,password);
+            setFullName("");
+            setPassword("");
+            setEmail("");
         }
   return (
     <div>
