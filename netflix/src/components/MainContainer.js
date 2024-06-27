@@ -6,7 +6,7 @@ const MainContainer = () => {
   return (
     <div>
       <VideoTitle/>
-<VideoBackgroud/>
+    <VideoBackgroud/>
     </div>
   )
 }
