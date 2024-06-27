@@ -2,6 +2,9 @@ import React from 'react'
 import { TMDB_IMG_URL } from '../utils/constant'
 
 const MovieCard = ({posterPath}) => {
+    //only render of having poster
+    
+    if(posterPath=== null) return null;
     return (
         <div className='w-48 pr-2' >
           <img src={`${TMDB_IMG_URL}/${posterPath}`} alt="movie-banner" />

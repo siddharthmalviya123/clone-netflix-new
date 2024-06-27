@@ -11,14 +11,9 @@ const searchSlice= createSlice({
         //action
         setSearchMovieDetails :(state,action)=>{
             const {searchMovie, movies}= action.payload;
+            state.movieName=searchMovie;
+            state.searchMovie=movies;
         },
-        setMovieName:(state,action)=>{
-            state.movieName= action.payload;
-        },
-        setSearchedMovies:(state, action)=>{
-        state.searchMovie= action.payload
-
-        }
     }
 })
 
