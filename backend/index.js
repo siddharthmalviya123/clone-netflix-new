@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin:'https://clone-netflix-new.vercel.app',
+    origin:'https://clone-netflix-new-1.onrender.com',
     credentials:true
 }
 app.use(cors(corsOptions));
