@@ -13,6 +13,8 @@ const Login = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [passwordMatch, setPasswordMatch] = useState(true); 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -21,8 +23,27 @@ const Login = () => {
     const loginHandler = () => {
         setIsLogin(!isLogin);
     }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        // Check if passwords match whenever password changes
+        setPasswordMatch(e.target.value === confirmPassword);
+    }
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+        // Check if passwords match whenever confirm password changes
+        setPasswordMatch(e.target.value === password);
+    }
+
+
     const getInputData = async (e)=>{
         e.preventDefault();
+        if (!passwordMatch && !isLogin) {
+            toast.error("Passwords do not match.");
+            return;
+        }
+
         dispatch(setLoading(true));
         if(isLogin){
             //login
@@ -70,6 +91,7 @@ const Login = () => {
         setFullName("");
         setEmail("");
         setPassword("");
+        setConfirmPassword("");
     }
     
     return (
@@ -85,13 +107,19 @@ const Login = () => {
                         !isLogin && <input value={fullName} onChange={(e)=>setFullName(e.target.value)} type='text' placeholder='Fullname' className='outline-none p-3 my-2 rounded-sm bg-gray-800 text-white' />
                     }
                     <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='Email' className='outline-none p-3 my-2 rounded-sm bg-gray-800 text-white' />
-                    <input value={password} onChange={(e)=>setPassword(e.target.value)} type='password' placeholder='Password' className='outline-none p-3 my-2 rounded-sm bg-gray-800 text-white' />
-                    <button type='submit' className='bg-red-600 mt-6 p-3 text-white rounded-sm font-medium'>{`${isLoading ? "loading...":(isLogin?"Login":"Signup")}`}</button>
-                    <p className='text-white mt-2'>{isLogin ? "New to Netflix?" : "Already have an account?"}<span onClick={loginHandler} className='ml-1 text-blue-900 font-medium cursor-pointer'>{isLogin ? "Signup" : "Login"}</span></p>
+                    <input value={password} onChange={handlePasswordChange} type='password' placeholder='Password' className='outline-none p-3 my-2 rounded-sm bg-gray-800 text-white' />
+                {!isLogin&&<input value={confirmPassword} onChange={handleConfirmPasswordChange} type='password' placeholder='Confirm Password' className='outline-none p-3 my-2 rounded-sm bg-gray-800 text-white' />}
+                {/* Add a message for password mismatch */}
+              
+                <button type='submit' className='bg-red-600 mt-6 p-3 text-white rounded-sm font-medium'>{`${isLoading ? "Loading..." : (isLogin ? "Login" : "Signup")}`}</button>
+                <p className='text-white mt-2'>{isLogin ? "New to Netflix?" : "Already have an account?"}<span onClick={loginHandler} className='ml-1 text-blue-900 font-medium cursor-pointer'>{isLogin ? "Signup" : "Login"}</span></p>
                 </div>
             </form>
-        </div>
+            </div>
+                    
+           
     )
 }
+
 
 export default Login
