@@ -1,32 +1,30 @@
-import axios from 'axios'
+import axios from "axios";
 import { options } from '../utils/constant';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { getTrailerMovie } from '../redux/movieSlice';
-import { useEffect } from 'react';
-const useMovieById =  async (movieId) => {
- 
-const dispatch= useDispatch();
+import { useEffect } from "react";
 
-useEffect(()=>{
-const getMovieById = async ()=>{
-    try{
-        const res= await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos`, options)
-    
+
+const useMovieById = async (movieId) => {
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    const getMovieById = async () => {
+      try {
+        const res = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos`, options);
+
         console.log(res.data.results);
-        const trailer= res?.data?.result?.filter((item)=>{
-            return item.type === "Trailer"
+        const trailer = res?.data?.results?.filter((item) => {
+          return item.type === "Trailer";
         })
-//trailer could be multiple 
-        dispatch(getTrailerMovie(trailer.length >0 ?  trailer[0] : res.data.results[0]))
+        dispatch(getTrailerMovie(trailer.length > 0 ? trailer[0] : res.data.results[0]));
+      } catch (error) {
+        console.log(error);
+      }
     }
+    getMovieById();
+  },[])
 
-    catch(error){
-console.log(error);
-    }
-}
-getMovieById();
-},[])
-    
 }
 
-export default useMovieById
+export default useMovieById;

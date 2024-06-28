@@ -2,7 +2,7 @@ import React from 'react';
 import { CiPlay1 } from "react-icons/ci";
 import { CiCircleInfo } from "react-icons/ci";
 
-const VideoTitle = ({title ,overview}) => {
+const VideoTitle = ({title, overview}) => {
     
     return (
         <div className='w-[vw] absolute text-white pt-[18%] p-12'>

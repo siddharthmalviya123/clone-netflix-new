@@ -1,16 +1,12 @@
 import React from 'react'
 import VideoTitle from './VideoTitle'
-import VideoBackgroud from './VideoBackgroud'
+import VideoBackground from './VideoBackground'
 import { useSelector } from 'react-redux'
 
 const MainContainer = () => {
 
     const movie= useSelector(store=>store.movie?.nowPlayingMovies);
-    if(!movie)
-        {
-                //early retun 
-                return;
-        }
+    if(!movie) return;
 
 const {overview,id,title}= movie[4];
 
@@ -18,7 +14,7 @@ const {overview,id,title}= movie[4];
   return (
     <div>
       <VideoTitle  title={title} overview={overview}/>
-    <VideoBackgroud movieId={id}/>
+    <VideoBackground movieId={id}/>
     </div>
   )
 }

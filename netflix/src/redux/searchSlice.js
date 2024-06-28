@@ -4,7 +4,7 @@ const searchSlice= createSlice({
     name: "search",
     initialState: {
         movieName: null,
-        searchMovie:null,
+        searchedMovie:null,
 
     },
     reducers:{
@@ -12,11 +12,11 @@ const searchSlice= createSlice({
         setSearchMovieDetails :(state,action)=>{
             const {searchMovie, movies}= action.payload;
             state.movieName=searchMovie;
-            state.searchMovie=movies;
+            state.searchedMovie=movies;
         },
     }
 })
 
 
-export const {setMovieName,setSearchMovieDetails, setSearchedMovies} = searchSlice.actions
+export const {setSearchMovieDetails} = searchSlice.actions
 export default searchSlice.reducer;
