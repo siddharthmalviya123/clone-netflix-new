@@ -21,7 +21,7 @@ const corsOptions = {
     origin:'https://clone-netflix-new.vercel.app',
     credentials:true
 }
-app.use(cors());
+app.use(cors(corsOptions));
 
 // api
 app.use("/api/v1/user", userRoute);
