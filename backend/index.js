@@ -21,7 +21,7 @@ const corsOptions = {
     origin:'https://clone-netflix-new-1.onrender.com',
     credentials:true
 }
-app.use(cors(corsOptions));
+app.use(cors());
 
 // api
 app.use("/api/v1/user", userRoute);
